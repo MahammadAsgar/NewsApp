@@ -1,0 +1,148 @@
+﻿@* @using NewsMedia.Infrastructure.DTOS.Entities.Article.Post
+@model AddArticleDto
+
+<form method="post" asp-controller="News" asp-action="UpdateArticle" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CategoryId"></label>
+        <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-control">
+            <option value="">Select a category</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Tags"></label>
+        <select asp-for="Tags" asp-items="@ViewBag.Tags" class="form-control" multiple></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ArticleFiles"></label>
+        <input asp-for="ArticleFiles" type="file" class="form-control" multiple />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Article</button>
+</form> *@
+@*   @model NewsMedia.Infrastructure.DTOS.Entities.Article.Get.GetArticleFullDto
+
+<form method="post" asp-controller="News" asp-action="UpdateArticle" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Context"></label>
+        <textarea asp-for="Context" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label "Category"></label>
+        <select asp-for="Category.Id" asp-items="@ViewBag.Categories" class="form-control">
+            <option value="">Select a category</option>
+        </select>
+        <span asp-validation-for="Category.Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Tags"></label>
+        <select asp-for="Tags" asp-items="@ViewBag.Tags" class="form-control" multiple></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ArticleFiles"></label>
+        <input asp-for="ArticleFiles" type="file" class="form-control" multiple />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Article</button>
+</form>
+ *@
+@model NewsMedia.Infrastructure.DTOS.Entities.Article.Get.GetArticleFullDto
+
+<style>
+    /* Style to differentiate currently selected options */
+    .current-option {
+        background-color: lightblue;
+    }
+</style>
+
+<form method="post" asp-controller="News" asp-action="UpdateArticle" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+
+
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Category"></label>
+        <select asp-for="Category.Id" asp-items="@ViewBag.Categories" class="form-control">
+            <option value="">Select a category</option>
+            @foreach (var category in ViewBag.Categories)
+            {
+                var categoryId = category.Value.ToString();
+                var isSelected = categoryId == Model.Category.Id.ToString() ? "selected" : null;
+                var isCurrent = categoryId == Model.Category.Id.ToString() ? "current-option" : null;
+
+                <option value="@categoryId" selected="@isSelected" class="@isCurrent">@category.Text</option>
+            }
+        </select>
+        <span asp-validation-for="Category.Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Tags"></label>
+        <select asp-for="Tags" asp-items="@ViewBag.Tags" class="form-control" multiple>
+            @foreach (var tag in ViewBag.Tags)
+            {
+                var tagId = Convert.ToInt32(tag.Value);
+                var isSelected = Model.Tags.Any(t => t.Id == tagId) ? "selected" : null;
+                var isCurrent = Model.Tags.Any(t => t.Id == tagId) ? "current-option" : null;
+
+                <option value="@tag.Value" selected="@isSelected" class="@isCurrent">@tag.Text</option>
+            }
+        </select>
+
+    </div>
+
+   @*  <div class="form-group">
+        <label asp-for="ArticleFiles"></label>
+        <input asp-for="ArticleFiles" type="file" class="form-control" multiple />
+    </div> *@
+
+    <button type="submit" class="btn btn-primary">Update Article</button>
+</form>

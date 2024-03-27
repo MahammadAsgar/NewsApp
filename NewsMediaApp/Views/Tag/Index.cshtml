@@ -1,0 +1,28 @@
+﻿@using NewsMedia.Infrastructure.DTOS.Entities.Tag.Get
+@model List<GetTagDto>
+
+
+
+@* 
+ <div class="container">
+        <h1>Tags</h1>
+
+        <ul class="list-group">
+            @foreach (var tag in Model)
+            {
+                <a class="list-group-item"  asp-action="GetTag">@tag.Name</a>
+            }
+        </ul>
+    </div> *@
+    <div class="container">
+    <h1>Tags</h1>
+
+    <div class="row">
+        @foreach (var tag in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <a class="list-group-item" asp-action="GetTag">@tag.Name</a>
+            </div>
+        }
+    </div>
+</div

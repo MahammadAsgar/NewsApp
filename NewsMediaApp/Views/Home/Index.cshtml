@@ -1,0 +1,107 @@
+﻿@using NewsMediaApp.Models
+@model ArtcilesCategories
+<style>
+    /* Custom CSS for the carousel */
+    #carouselExample {
+        height: 400px; /* Set a fixed height for the carousel */
+    }
+
+        /* Custom CSS for carousel images */
+        #carouselExample .carousel-item img {
+            max-height: 300px; /* Set max height for carousel images */
+            width: 50px; /* Ensure images maintain aspect ratio */
+        }
+
+        /* Custom CSS for carousel text */
+        #carouselExample .carousel-item .card-text {
+            font-size: 16px; /* Set font size for carousel text */
+        }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left Column (80% width) -->
+        <div class="col-md-9">
+            <!-- Carousel -->
+            <div class="card custom-card">
+                <div id="carouselExample" class="carousel slide">
+                    <div class="carousel-inner">
+                        @foreach (var item in Model.Articles.ToList())
+                        {
+                            <a asp-action="GetArticle" asp-controller="News" asp-route-id="@item.Id">
+                                <div class="carousel-item @(item == Model.Articles.First()? "active" : "")">
+                                    <p class="d-block w-100">@item.Name</p>
+                                    <img src="~/images/@(item.ArticleTitleFile.FileName)" class="d-block w-100 img-fluid">
+                                    <p class="card-text">@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+                                </div>
+                            </a>
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+
+@* 
+            <!-- News Section -->
+            <div class="container">
+                @foreach (var category in Model.CategoriesArticles.ToList())
+                {
+                    <span>
+                        <a asp-action="GetCategory" asp-controller="Category" asp-route-id="@category.id">
+                            <h3>@category.Name</h3>
+                        </a>
+                    </span>
+                    <br />
+                    <div class="row">
+                        @foreach (var item in category.Articles.Take(2))
+                        {
+                            <div class="col-md-4 mb-4">
+                                <!-- Adjust the column width to fit 3 cards per row -->
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <a asp-action="GetArticle" asp-controller="News" asp-route-id="@item.Id">
+                                            <h5 class="card-title">@item.Name</h5>
+                                        </a>
+                                        <p class="card-text">@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+                                        <img src="~/images/@(item.ArticleContentFiles.FirstOrDefault()?.FileName)" class="card-img img-fluid" alt="...">
+                                        @foreach (var tag in item.Tags)
+                                        {
+                                            <a asp-action="GetTag" asp-controller="Tag" asp-route-id="@tag.Id">
+                                                <p>@tag.Name</p>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Right Column (20% width) -->
+        <div class="col-md-3">
+            @foreach (var item in Model.Articles.ToList())
+            {
+                <div>
+                    <a asp-action="GetArticle" asp-controller="News" asp-route-id="@item.Id">
+                        <p class="d-block w-100">@item.Name</p>
+                    </a>
+                    <p class="card-text">@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+                </div>
+                <br />
+            }
+        </div>
+ *@
+    </div>
+</div>
+

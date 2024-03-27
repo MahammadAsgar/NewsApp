@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\NewsMedia.Infrastructure",
+    "\\NewsMedia.Infrastructure\\DTOS",
+    "\\NewsMedia.Infrastructure\\DTOS\\Entities",
+    "\\NewsMedia.Infrastructure\\DTOS\\Entities\\Article",
+    "\\NewsMedia.Infrastructure\\DTOS\\Entities\\Article\\Get",
+    "\\NewsMediaApp",
+    "\\NewsMediaApp\\Controllers",
+    "\\NewsMediaApp\\Views",
+    "\\NewsMediaApp\\Views\\Admin",
+    "\\NewsMediaApp\\Views\\Home"
+  ],
+  "SelectedNode": "\\NewsMediaApp\\Views\\Home\\Index.cshtml",
+  "PreviewInSolutionExplorer": true
+}

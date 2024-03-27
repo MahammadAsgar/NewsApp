@@ -1,0 +1,32 @@
+﻿@using NewsMedia.Infrastructure.DTOS.Entities.Article.Get
+@model List<GetArticleFullDto>
+
+
+<div class="row">
+    <div class="col-md">
+        <!-- Adjust the column width to fit 3 cards per row -->
+        <form asp-action="UserList" asp-controller="Admin" method="get">
+            <button type="submit" class="btn btn-primary">User List</button>
+        </form>
+
+        <div class="card custom-card">
+            <div class="card-body">
+                @foreach (var item in Model)
+                {
+                    <h5 class="card-title">@item.Name</h5>
+                    <p>@item.Category.Name</p>
+                    
+                    <p>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseDescription@(item.Id)" aria-expanded="false" aria-controls="collapseDescription@(item.Id)">
+                            Read more
+                        </button>
+                    </p>
+                    @foreach (var tag in item.Tags)
+                    {
+                        <p>@tag.Name</p>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

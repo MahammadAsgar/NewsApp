@@ -1,0 +1,15 @@
+﻿@* @using NewsMedia.Infrastructure.DTOS.Entities.Category.Get
+@model List<GeyArticle>
+
+@foreach (var item in Model)
+{
+    <table>
+        <tbody>
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        </tbody>
+    </table>
+} *@
+<h1>Article</h1>
+<a asp-controller="News" asp-action="AddArticle">Click</a>.

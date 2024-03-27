@@ -1,0 +1,23 @@
+﻿@using NewsMedia.Infrastructure.DTOS.Entities.Article.Get
+@model GetArticleFullDto
+<div class="container">
+
+    <div class="row">
+        <div class="col-md">
+            <!-- Adjust the column width to fit 3 cards per row -->
+            <div class="card custom-card">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Name</h5>
+                    <p class="card-text">@Model.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+                    <img src="~/images/@(Model.ArticleContentFiles.FirstOrDefault()?.FileName)" class="card-img img-fluid" alt="...">
+                    <p>@Model.Content</p>
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <p>@tag.Name</p>
+                    }
+                    <a asp-action="UpdateArticle" asp-controller="News" asp-route-id="@Model.Id"> this is update</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

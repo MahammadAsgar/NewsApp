@@ -1,0 +1,30 @@
+﻿@using NewsMedia.Infrastructure.DTOS.Users
+@model SignInDto
+
+<h2>Sign In</h2>
+
+<form asp-action="SignIn" method="post">
+    <div>
+        <label asp-for="Email">Email:</label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="Password">Password:</label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <button type="submit">Sign In</button>
+    </div>
+</form>
+
+
+
+<form asp-action="SignOut" method="post">
+    
+    <div>
+        <button type="submit">Sign Out</button>
+    </div>
+</form>
+

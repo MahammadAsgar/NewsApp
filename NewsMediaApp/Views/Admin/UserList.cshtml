@@ -1,0 +1,44 @@
+﻿@using NewsMedia.Infrastructure.DTOS.Users
+@model IEnumerable<GetUserBasicData>
+
+<div class="container">
+    <h2>User List</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>FullName</th>
+                <th>Email</th>
+                <th>Action</th>
+                <th>Role</th>
+                <th>Show Articles</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.FullName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <form asp-action="ToggleModerator" asp-controller="Admin" method="post">
+                            <input type="hidden" name="userId" value="@user.id" />
+                            <button type="submit" class="btn btn-@(user.Role == "Moderator" ? "danger" : "primary")">
+                                @(user.Role == "Moderator" ? "Remove Moderator" : "Make Moderator")
+                            </button>
+                        </form>
+                    </td>
+                    <td>@user.Role</td>
+                    <td>
+                        @if (user.Role == "Moderator")
+                        {
+                            <form asp-action="UserArticles" asp-controller="Admin" method="get">
+                                <input type="hidden" name="userId" value="@user.id" />
+                                <button type="submit" class="btn btn-primary">View Articles</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
