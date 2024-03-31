@@ -54,6 +54,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxTaWduVXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Mahammad/source/repos/NewsAppService/NewsMediaApp/NewsMediaApp/Views/Home/GetArticleById.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxHZXRBcnRpY2xlQnlJZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Mahammad/source/repos/NewsAppService/NewsMediaApp/NewsMediaApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -78,12 +82,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xHZXRBcnRpY2xlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Mahammad/source/repos/NewsAppService/NewsMediaApp/NewsMediaApp/Views/News/GetArticlesByCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xHZXRBcnRpY2xlc0J5Q2F0ZWdvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahammad/source/repos/NewsAppService/NewsMediaApp/NewsMediaApp/Views/News/GetArticlesByTag.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xHZXRBcnRpY2xlc0J5VGFnLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Mahammad/source/repos/NewsAppService/NewsMediaApp/NewsMediaApp/Views/News/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Mahammad/source/repos/NewsAppService/NewsMediaApp/NewsMediaApp/Views/News/UpdateArticle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xVcGRhdGVBcnRpY2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahammad/source/repos/NewsAppService/NewsMediaApp/NewsMediaApp/Views/Shared/Components/Articles/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQXJ0aWNsZXNcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Mahammad/source/repos/NewsAppService/NewsMediaApp/NewsMediaApp/Views/Shared/Components/Category/Default.cshtml]

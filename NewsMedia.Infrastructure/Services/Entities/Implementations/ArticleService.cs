@@ -7,8 +7,11 @@ using NewsMedia.Domain.Models.Entities;
 using NewsMedia.Domain.Models.Users;
 using NewsMedia.Infrastructure.DTOS.Entities.Article.Get;
 using NewsMedia.Infrastructure.DTOS.Entities.Article.Post;
+using NewsMedia.Infrastructure.DTOS.Entities.Category.Get;
+using NewsMedia.Infrastructure.DTOS.Entities.Tag.Get;
 using NewsMedia.Infrastructure.Services.Entities.Abstractions;
 using NewsMedia.Infrastructure.Services.Storage;
+using System.Linq;
 
 namespace NewsMedia.Infrastructure.Services.Entities.Implementations
 {
@@ -61,6 +64,13 @@ namespace NewsMedia.Infrastructure.Services.Entities.Implementations
         {
             var entities = await _articleRepository.GetArticles();
             return _mapper.Map<IEnumerable<GetArticleFullDto>>(entities);
+        }
+
+        public async Task<IEnumerable<GetArticleFullDto>> GetArticlesByTag(GetCategoryDto categoryDto, List<GetTagDto> tagDtos)
+        {
+            var tags = _mapper.Map<IEnumerable<Tag>>(tagDtos);
+            var entites = _articleRepository.Where(x => x.CategoryId == categoryDto.Id && x.Tags.Any(tag => tags.Contains(tag))).ToList();
+            return _mapper.Map<IEnumerable<GetArticleFullDto>>(entites);
         }
 
         public async Task<IEnumerable<GetArticleDto>> GetArticlesFilter(string param)

@@ -1,0 +1,14 @@
+﻿@using NewsMedia.Infrastructure.DTOS.Entities.Article.Get
+@model IEnumerable<GetArticleFullDto>
+
+@foreach (var item in Model)
+{
+    <div>
+        <a asp-action="GetArticle" asp-controller="News" asp-route-id="@item.Id">
+            <p class="d-block w-100">@item.Name</p>
+        </a>
+        <p class="card-text">@(item.Content.Substring(0, 70))...</p>
+        <p class="card-text">@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+    </div>
+    <br />
+}

@@ -31,6 +31,19 @@ namespace NewsMediaApp.Controllers
             return View(datas);
         }
 
+        [HttpGet]
+        public async Task<IActionResult>  GetArticleById(int id)
+        {
+            var article = await _articleService.GetArticle(id);
+            var articles= await _articleService.GetArticlesByTag(article.Category, article.Tags);
+            var datas = new ArticleArticles
+            {
+                Article = article,
+                Articles = articles
+            };
+            return View(datas);
+        }
+
         [Authorize]
         public IActionResult Privacy()
         {

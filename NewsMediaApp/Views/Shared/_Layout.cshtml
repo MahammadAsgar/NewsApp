@@ -7,42 +7,101 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .sub-menu {
+            display: none;f
+        }
+
+        /* Show submenu when hovering over its parent */
+        .menu-item-has-children:hover .sub-menu {
+            display: block;
+        }
+
+        .bg-black {
+            background-color: black;
+        }
+
+        /* Custom style for left and right columns */
+        .custom-column {
+            padding: 0 15px; /* Adjust padding as needed */
+            background-color: Cornsilk; /* Set background color */
+        }
+
+        /* Style for Aqua colored <br> */
+        .aqua-br {
+            border-top: 3px solid Aqua;
+            margin-top: 15px; /* Adjust margin as needed */
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <header class="text-center">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApplication1</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0">
+                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+                        <!-- Invoke the "Category" component -->
                         @await Component.InvokeAsync("Category")
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1 custom-column">
+                <!-- Left column content here -->
+            </div>
+            <div class="col-md-10">
+                <hr class="aqua-br">
+
+                <!-- Center column content here -->
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+            <div class="col-md-1 custom-column">
+                <!-- Right column content here -->
+            </div>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+    <footer class="border-top footer text-muted text-center bg-black border-bottom box-shadow mb-3">
+        <hr class="aqua-br">
+        <div class="container-fluid text-white">
+            <div class="row align-items-center">
+                <div class="col">
+                    Copyright © 2022 Bütün hüquqlar qorunur
+                </div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-primary btn-square back-to-top" onclick="scrollToTop()">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </footer>
+
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

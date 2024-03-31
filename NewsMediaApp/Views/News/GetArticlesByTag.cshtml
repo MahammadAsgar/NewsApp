@@ -1,0 +1,43 @@
+﻿@using NewsMedia.Infrastructure.DTOS.Entities.Tag.Get
+@model GetTagWithArticlesDto
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9" id="leftcolumn">
+            <div class="container">
+                <span>
+                    <h3>@Model.Name</h3>
+                </span>
+                <br />
+                <div class="row">
+                    @foreach (var item in Model.Articles)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card custom-card">
+                                <div class="card-body">
+                                    <a asp-action="GetArticle" asp-controller="News" asp-route-id="@item.Id">
+                                        <h5 class="card-title">@item.Name</h5>
+                                    </a>
+                                    <p class="card-text">@(item.Content.Substring(0, Math.Min(70, item.Content.Length)))...</p>
+                                    <p class="card-text">@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+                                    <img src="~/images/@(item.ArticleTitleFile.FileName)" class="card-img img-fluid" alt="...">
+                                    <div class="tag-container">
+                                        @foreach (var tag in item.Tags)
+                                        {
+                                            <a asp-action="GetArticlesByTag" asp-controller="News" asp-route-tagId="@tag.Id">
+                                                <span class="tag" style="background-color: randomColor()">@tag.Name</span>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" id="rightcolumn">
+            @await Component.InvokeAsync("Articles")
+        </div>
+    </div>
+</div>

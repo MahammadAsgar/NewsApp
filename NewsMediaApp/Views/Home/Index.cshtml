@@ -8,40 +8,124 @@
 
         /* Custom CSS for carousel images */
         #carouselExample .carousel-item img {
-            max-height: 300px; /* Set max height for carousel images */
-            width: 50px; /* Ensure images maintain aspect ratio */
+            max-height: 400px; /* Set max height for carousel images */
+            width: auto; /* Ensure images maintain aspect ratio */
         }
 
         /* Custom CSS for carousel text */
-        #carouselExample .carousel-item .card-text {
-            font-size: 16px; /* Set font size for carousel text */
+        #carouselExample .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            color: white; /* Text color */
+            bottom: 0; /* Position at the bottom */
+            left: 0;
+            right: 0;
+            padding: 20px; /* Add padding for better readability */
         }
+
+            #carouselExample .carousel-caption h5 a {
+                color: white; /* Link color */
+                text-decoration: none; /* Remove underline */
+            }
+
+        #carouselExample .carousel-control-prev,
+        #carouselExample .carousel-control-next {
+            color: black; /* Change control button color */
+            opacity: 0.8; /* Reduce opacity */
+        }
+
+        #carouselExample .carousel-control-prev-icon,
+        #carouselExample .carousel-control-next-icon {
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+            border-radius: 50%; /* Rounded shape */
+        }
+
+        #carouselExample .carousel-control-prev:hover,
+        #carouselExample .carousel-control-next:hover {
+            color: black; /* Change control button color on hover */
+            opacity: 1; /* Full opacity on hover */
+        }
+
+    /* Custom CSS for the news section */
+    .container {
+        padding-top: 20px; /* Add padding to the top of the container */
+    }
+
+        .container h3 {
+            font-size: 24px; /* Adjust category title font size */
+            margin-bottom: 10px; /* Add margin below category title */
+        }
+
+        .container .card.custom-card {
+            border: none; /* Remove border from cards */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow to cards */
+        }
+
+            .container .card.custom-card .card-body {
+                padding: 20px; /* Add padding to card body */
+            }
+
+            .container .card.custom-card .card-title {
+                font-size: 18px; /* Adjust article title font size */
+                margin-bottom: 10px; /* Add margin below article title */
+            }
+
+            .container .card.custom-card .card-text {
+                font-size: 14px; /* Adjust article details font size */
+                margin-bottom: 15px; /* Add margin below article details */
+            }
+
+            .container .card.custom-card img.card-img {
+                width: 100%; /* Make images responsive */
+                height: auto; /* Ensure images maintain aspect ratio */
+                margin-bottom: 15px; /* Add margin below images */
+            }
+
+            .container .card.custom-card a {
+                text-decoration: none; /* Remove underline from links */
+            }
+
+            .container .card.custom-card p {
+                margin-bottom: 5px; /* Add margin below paragraph elements */
+            }
+
+    .tag-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px; /* Add gap between tags */
+    }
+
+    .tag {
+        background-color: Aqua;
+        color: white;
+        padding: 3px 8px; /* Adjust padding */
+        margin-bottom: 5px;
+        border-radius: 3px; /* Adjust border radius */
+    }
 </style>
 
 <div class="container-fluid">
     <div class="row">
         <!-- Left Column (80% width) -->
-        <div class="col-md-9">
+        <div class="col-md-9" id="leftcolumn">
             <!-- Carousel -->
             <div class="card custom-card">
-                <div id="carouselExample" class="carousel slide">
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @foreach (var item in Model.Articles.ToList())
                         {
-                            <a asp-action="GetArticle" asp-controller="News" asp-route-id="@item.Id">
-                                <div class="carousel-item @(item == Model.Articles.First()? "active" : "")">
-                                    <p class="d-block w-100">@item.Name</p>
-                                    <img src="~/images/@(item.ArticleTitleFile.FileName)" class="d-block w-100 img-fluid">
-                                    <p class="card-text">@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+                            <div class="carousel-item @(item == Model.Articles.First()? "active" : "")">
+                                <img src="~/images/@(item.ArticleTitleFile.FileName)" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5><a href="@Url.Action("GetArticle", "News", new { id = item.Id })">@item.Name</a></h5>
+                                    <p>@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
                                 </div>
-                            </a>
+                            </div>
                         }
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
@@ -49,8 +133,6 @@
                 </div>
             </div>
 
-
-@* 
             <!-- News Section -->
             <div class="container">
                 @foreach (var category in Model.CategoriesArticles.ToList())
@@ -62,23 +144,25 @@
                     </span>
                     <br />
                     <div class="row">
-                        @foreach (var item in category.Articles.Take(2))
+                        @foreach (var item in category.Articles.Take(6))
                         {
                             <div class="col-md-4 mb-4">
-                                <!-- Adjust the column width to fit 3 cards per row -->
                                 <div class="card custom-card">
                                     <div class="card-body">
                                         <a asp-action="GetArticle" asp-controller="News" asp-route-id="@item.Id">
                                             <h5 class="card-title">@item.Name</h5>
                                         </a>
+                                        <p class="card-text">@(item.Content.Substring(0, 70))...</p>
                                         <p class="card-text">@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
-                                        <img src="~/images/@(item.ArticleContentFiles.FirstOrDefault()?.FileName)" class="card-img img-fluid" alt="...">
-                                        @foreach (var tag in item.Tags)
-                                        {
-                                            <a asp-action="GetTag" asp-controller="Tag" asp-route-id="@tag.Id">
-                                                <p>@tag.Name</p>
-                                            </a>
-                                        }
+                                        <img src="~/images/@(item.ArticleTitleFile.FileName)" class="card-img img-fluid" alt="...">
+                                        <div class="tag-container">
+                                            @foreach (var tag in item.Tags)
+                                            {
+                                                <a asp-action="GetArticlesByTag" asp-controller="News" asp-route-tagId="@tag.Id">
+                                                    <span class="tag" style="background-color:">@tag.Name</span>
+                                                </a>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -87,21 +171,26 @@
                 }
             </div>
         </div>
-
         <!-- Right Column (20% width) -->
-        <div class="col-md-3">
-            @foreach (var item in Model.Articles.ToList())
-            {
-                <div>
-                    <a asp-action="GetArticle" asp-controller="News" asp-route-id="@item.Id">
-                        <p class="d-block w-100">@item.Name</p>
-                    </a>
-                    <p class="card-text">@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
-                </div>
-                <br />
-            }
+        <div class="col-md-3" id="rightcolumn">
+            @await Component.InvokeAsync("Articles")
         </div>
- *@
     </div>
 </div>
 
+<script>
+    // Function to set random background color to each tag
+    document.addEventListener("DOMContentLoaded", function () {
+        var tags = document.querySelectorAll(".tag");
+        tags.forEach(function (tag) {
+            tag.style.backgroundColor = RandomColor();
+        });
+    });
+
+    // RandomColor function definition
+    function RandomColor() {
+        var colors = ["#FF5733", "#FFC300", "#FF33FF", "#3366FF", "#33FF33", "#33CCCC", "#CC33FF"];
+        var randomIndex = Math.floor(Math.random() * colors.length);
+        return colors[randomIndex];
+    }
+</script>

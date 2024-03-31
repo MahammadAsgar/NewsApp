@@ -1,9 +1,25 @@
 ﻿@using NewsMedia.Infrastructure.DTOS.Entities.CategoryBase.Get
 @model List<GetCategoryBaseWithCategoriesDto>
-
+<style>
+    .custom-hr {
+        /*margin-top: 5px; /* Adjust the margin as needed */
+        /*margin-bottom: 5px; /* Adjust the margin as needed */
+        border-top: 3px solid Aqua;
+    }
+</style>
 @foreach (var item in Model)
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="@item.Id">@item.Name</a>
+    <li id="menu-item-@item.Id" class="nav-item dropdown">
+        <a href="#" class="nav-link text-light dropdown-toggle" id="dropdownMenuLink-@item.Id" role="button" data-bs-toggle="dropdown" aria-expanded="false">@item.Name</a>
+        <hr class="custom-hr" />
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-@item.Id">
+            @foreach (var category in item.Categories)
+            {
+                <li>
+                    <a href="@Url.Action("GetArticlesByCategory", "News", new { categoryId = category.Id })"
+                       class="dropdown-item" style="background-color: black; color: white;">@category.Name</a>
+                </li>
+            }
+        </ul>
     </li>
 }

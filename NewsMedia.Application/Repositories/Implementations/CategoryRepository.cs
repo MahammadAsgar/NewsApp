@@ -22,8 +22,6 @@ namespace NewsMedia.Application.Repositories.Implementations
                  .ThenInclude(y => y.ArticleTitleFile)
                  .Include(x => x.Articles)
                  .ThenInclude(y => y.Tags)
-                 //.Include(x=>x.Articles)
-                 //.ThenInclude(y=>y.AppUser)
                  .FirstOrDefaultAsync(x => x.Id == id);
         }
 
@@ -40,7 +38,7 @@ namespace NewsMedia.Application.Repositories.Implementations
                 .Include(x => x.Articles)
                 .ThenInclude(y => y.Tags)
                 .OrderBy(x => x.Id)
-                .Where(x => x.Articles.Count() > 2)
+                .Where(x => x.Articles.Count() >=1)
                 .ToListAsync();
         }
     }

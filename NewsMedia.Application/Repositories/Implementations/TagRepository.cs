@@ -19,6 +19,8 @@ namespace NewsMedia.Application.Repositories.Implementations
         {
             return await _dbSet
                 .Include(x => x.Articles)
+                .ThenInclude(y=>y.ArticleTitleFile)
+                .Include(x=>x.Articles)
                 .ThenInclude(y => y.Tags)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }

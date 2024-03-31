@@ -1,23 +1,59 @@
-﻿@using NewsMedia.Infrastructure.DTOS.Entities.Article.Get
-@model GetArticleFullDto
-<div class="container">
+﻿@model ArticleArticles
 
+<!-- Left Column (80% width) -->
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md">
-            <!-- Adjust the column width to fit 3 cards per row -->
+        <div class="col-md-9" id="leftcolumn">
+
             <div class="card custom-card">
                 <div class="card-body">
-                    <h5 class="card-title">@Model.Name</h5>
-                    <p class="card-text">@Model.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
-                    <img src="~/images/@(Model.ArticleContentFiles.FirstOrDefault()?.FileName)" class="card-img img-fluid" alt="...">
-                    <p>@Model.Content</p>
-                    @foreach (var tag in Model.Tags)
+                    <a asp-action="GetArticle" asp-controller="News" asp-route-id="@Model.Article.Id">
+                        <h5 class="card-title">@Model.Article.Name</h5>
+                    </a>
+                    <img src="~/images/@Model.Article.ArticleTitleFile.FileName" class="card-img img-fluid" alt="...">
+                    <p class="card-text">@Model.Article.Content</p>
+                    <p class="card-text">@Model.Article.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+                    @foreach (var item in Model.Article.ArticleContentFiles)
                     {
-                        <p>@tag.Name</p>
+                        <img src="~/images/@item.FileName" class="card-img img-fluid" alt="...">
                     }
-                    <a asp-action="UpdateArticle" asp-controller="News" asp-route-id="@Model.Id"> this is update</a>
+                    @foreach (var tag in Model.Article.Tags)
+                    {
+                        <a asp-action="GetTag" asp-controller="Tag" asp-route-id="@tag.Id">
+                            <p style="color:cornflowerblue">@tag.Name</p>
+                        </a>
+                    }
                 </div>
             </div>
+
+            <div class="container">
+                @foreach (var item in Model.Articles)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <a asp-action="GetArticle" asp-controller="News" asp-route-id="@item.Id">
+                                    <h5 class="card-title">@item.Name</h5>
+                                </a>
+                                <p class="card-text">@(item.Content.Substring(0, 70))...</p>
+                                <p class="card-text">@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+                                <img src="~/images/@(item.ArticleTitleFile.FileName)" class="card-img img-fluid" alt="...">
+                                @foreach (var tag in item.Tags)
+                                {
+                                    <a asp-action="GetTag" asp-controller="Tag" asp-route-id="@tag.Id">
+                                        <p style="color:cornflowerblue">@tag.Name</p>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-3" id="rightcolumn">
+            @await Component.InvokeAsync("Articles")
         </div>
     </div>
 </div>
+
+

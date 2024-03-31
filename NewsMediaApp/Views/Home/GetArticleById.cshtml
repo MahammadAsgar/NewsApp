@@ -1,0 +1,51 @@
+﻿@model ArticleArticles
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="card custom-card">
+            <div class="card-body">
+                <a asp-action="GetArticle" asp-controller="News" asp-route-id="@Model.Article.Id">
+                    <h5 class="card-title">@Model.Article.Name</h5>
+                </a>
+                <img src="~/images/@Model.Article.ArticleTitleFile.FileName" class="card-img img-fluid" alt="...">
+                <p class="card-text">@Model.Article.Content</p>
+                <p class="card-text">@Model.Article.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+                @foreach (var item in Model.Article.ArticleContentFiles)
+                {
+                    <img src="~/images/@item.FileName" class="card-img img-fluid" alt="...">
+                }
+                @foreach (var tag in Model.Article.Tags)
+                {
+                    <a asp-action="GetTag" asp-controller="Tag" asp-route-id="@tag.Id">
+                        <p style="color:cornflowerblue">@tag.Name</p>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model.Articles)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <a asp-action="GetArticle" asp-controller="News" asp-route-id="@item.Id">
+                            <h5 class="card-title">@item.Name</h5>
+                        </a>
+                        <p class="card-text">@(item.Content.Substring(0, 70))...</p>
+                        <p class="card-text">@item.AddDate.ToString("MMM dd, yyyy HH:mm")</p>
+                        <img src="~/images/@(item.ArticleTitleFile.FileName)" class="card-img img-fluid" alt="...">
+                        @foreach (var tag in item.Tags)
+                        {
+                            <a asp-action="GetTag" asp-controller="Tag" asp-route-id="@tag.Id">
+                                <p style="color:cornflowerblue">@tag.Name</p>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

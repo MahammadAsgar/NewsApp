@@ -541,10 +541,6 @@
       "PackagePath": "staticwebassets\\images\\2024-03-25_18279.jpeg"
     },
     {
-      "Id": "C:\\Users\\Mahammad\\source\\repos\\NewsAppService\\NewsMediaApp\\NewsMediaApp\\wwwroot\\images\\2024-03-25_22308.jpeg",
-      "PackagePath": "staticwebassets\\images\\2024-03-25_22308.jpeg"
-    },
-    {
       "Id": "C:\\Users\\Mahammad\\source\\repos\\NewsAppService\\NewsMediaApp\\NewsMediaApp\\wwwroot\\images\\2024-03-25_31383.jpeg",
       "PackagePath": "staticwebassets\\images\\2024-03-25_31383.jpeg"
     },
@@ -587,6 +583,26 @@
     {
       "Id": "C:\\Users\\Mahammad\\source\\repos\\NewsAppService\\NewsMediaApp\\NewsMediaApp\\wwwroot\\images\\2024-03-25_86804.jpeg",
       "PackagePath": "staticwebassets\\images\\2024-03-25_86804.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Mahammad\\source\\repos\\NewsAppService\\NewsMediaApp\\NewsMediaApp\\wwwroot\\images\\2024-03-30_16154.jpeg",
+      "PackagePath": "staticwebassets\\images\\2024-03-30_16154.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Mahammad\\source\\repos\\NewsAppService\\NewsMediaApp\\NewsMediaApp\\wwwroot\\images\\2024-03-30_20623.jpeg",
+      "PackagePath": "staticwebassets\\images\\2024-03-30_20623.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Mahammad\\source\\repos\\NewsAppService\\NewsMediaApp\\NewsMediaApp\\wwwroot\\images\\2024-03-30_26663.jpeg",
+      "PackagePath": "staticwebassets\\images\\2024-03-30_26663.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Mahammad\\source\\repos\\NewsAppService\\NewsMediaApp\\NewsMediaApp\\wwwroot\\images\\2024-03-30_44792.jpeg",
+      "PackagePath": "staticwebassets\\images\\2024-03-30_44792.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Mahammad\\source\\repos\\NewsAppService\\NewsMediaApp\\NewsMediaApp\\wwwroot\\js\\randomColor.js",
+      "PackagePath": "staticwebassets\\js\\randomColor.js"
     },
     {
       "Id": "C:\\Users\\Mahammad\\source\\repos\\NewsAppService\\NewsMediaApp\\NewsMediaApp\\wwwroot\\js\\site.js",

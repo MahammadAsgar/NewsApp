@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NewsMedia.Infrastructure.DTOS.Entities.Article.Post;
 using NewsMedia.Infrastructure.Services.Entities.Abstractions;
+using NewsMediaApp.Models;
 using System.Security.Claims;
 
 namespace NewsMediaApp.Controllers
@@ -29,15 +30,32 @@ namespace NewsMediaApp.Controllers
         public async Task<IActionResult> GetArticle(int id)
         {
             var article = await _articleService.GetArticle(id);
+            var articles = await _articleService.GetArticlesByTag(article.Category, article.Tags);
+            var datas = new ArticleArticles
+            {
+                Article = article,
+                Articles = articles
+            };
+
             if (article == null)
             {
                 return NotFound();
             }
-            return View(article);
+
+            return View(datas);
         }
 
+        public async Task<IActionResult> GetArticlesByCategory(int categoryId)
+        {
+            var articles = await _categoryService.GetCategory(categoryId);
+            return View(articles);
+        }
 
-
+        public async Task<IActionResult> GetArticlesByTag(int tagId)
+        {
+            var articles = await _tagService.GetTag(tagId);
+            return View(articles);
+        }
         public IActionResult AddArticle()
         {
             var categories = _categoryService.GetCategories().Result;
@@ -83,7 +101,6 @@ namespace NewsMediaApp.Controllers
             // Pass the article data and selected tags to the view
             ViewBag.Categories = new SelectList(categories, "Id", "Name", article.Category.Id);
             ViewBag.Tags = new MultiSelectList(tags, "Id", "Name", selectedTags);
-
             return View(article);
         }
     }
