@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewsMedia.Domain.Models.Entities;
 using NewsMedia.Infrastructure.Services.Entities.Abstractions;
 
 namespace NewsMediaApp.ViewComponents
@@ -11,9 +12,9 @@ namespace NewsMediaApp.ViewComponents
             _tagService = tagService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(Language language)
         {
-            var tags = await _tagService.GetTags();
+            var tags = await _tagService.GetTags(language);
             return View(tags);
         }
     }

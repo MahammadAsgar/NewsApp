@@ -33,21 +33,21 @@ namespace NewsMedia.Infrastructure.Services.Entities.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task<GetCategoryBaseWithCategoriesDto> GetCategoryBase(int id)
+        public async Task<GetCategoryBaseWithCategoriesDto> GetCategoryBase(int id, Language language)
         {
-            var entity = await _categoryBaseRepository.GetCategoryBaseWithCategory(id);
+            var entity = await _categoryBaseRepository.GetCategoryBaseWithCategory(id, language );
             return _mapper.Map<GetCategoryBaseWithCategoriesDto>(entity);
         }
 
-        public async Task<IEnumerable<GetCategoryBaseWithCategoriesDto>> GetCategoryBasesWithCategories()
+        public async Task<IEnumerable<GetCategoryBaseWithCategoriesDto>> GetCategoryBasesWithCategories(Language language)
         {
-            var entities = await _categoryBaseRepository.GetCategoryBaseWithCategories();
+            var entities = await _categoryBaseRepository.GetCategoryBaseWithCategories(language);
             return _mapper.Map<IEnumerable<GetCategoryBaseWithCategoriesDto>>(entities);
         }
 
-        public async Task<IEnumerable<GetCategoryBaseDto>> GetCategoryBases()
+        public async Task<IEnumerable<GetCategoryBaseDto>> GetCategoryBases(Language language)
         {
-            var entities = await _categoryBaseRepository.GetCategoryBaseWithCategories();
+            var entities = await _categoryBaseRepository.GetCategoryBaseWithCategories(language);
             return _mapper.Map<IEnumerable<GetCategoryBaseDto>>(entities);
         }
 

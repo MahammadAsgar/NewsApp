@@ -15,17 +15,17 @@ namespace NewsMedia.Application.Repositories.Implementations
             _dbContext = dbContext;
             _dbsSet = _dbContext.Set<Article>();
         }
-        public async Task<Article> GetArticleFull(int id)
+        public async Task<Article> GetArticleFull(int id, Language language)
         {
             return await _dbsSet
                 .Include(x => x.Tags)
                 .Include(x => x.Category)
                 .Include(x => x.ArticleTitleFile)
                 .Include(x => x.ArticleContentFiles)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id && x.Language == language);
         }
 
-        public async Task<IEnumerable<Article>> GetArticles()
+        public async Task<IEnumerable<Article>> GetArticles(Language language)
         {
             var articles = await _dbsSet
                 .Include(x => x.Tags)
@@ -37,10 +37,11 @@ namespace NewsMedia.Application.Repositories.Implementations
                 .ToListAsync();
             return articles;
         }
-        public async Task<IEnumerable<Article>> GetArticleSlider()
+        public async Task<IEnumerable<Article>> GetArticleSlider(Language language)
         {
             return await _dbsSet
                 .Include(x => x.ArticleTitleFile)
+                .Where(x => x.Language == language)
                 .ToListAsync();
         }
 
@@ -55,14 +56,14 @@ namespace NewsMedia.Application.Repositories.Implementations
                 .Where(predicate);
         }
 
-        public async Task<IEnumerable<Article>> ArticlesByUser(int userId)
+        public async Task<IEnumerable<Article>> ArticlesByUser(int userId, Language language)
         {
             return await _dbsSet
                 .Include(x => x.Tags)
                 .Include(x => x.Category)
                 .Include(x => x.ArticleTitleFile)
                 .OrderBy(x => x.AddDate)
-                .Where(x => x.AppUser.Id == userId)
+                .Where(x => x.AppUser.Id == userId && x.Language == language)
                 .ToListAsync();
         }
     }

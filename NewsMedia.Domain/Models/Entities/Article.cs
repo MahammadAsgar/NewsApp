@@ -14,5 +14,11 @@ namespace NewsMedia.Domain.Models.Entities
         public ArticleTitleFile ArticleTitleFile { get; set; }
         public virtual List<ArticleContentFile>? ArticleContentFiles { get; set; }
         public AppUser AppUser { get; set; }
+        public Language Language { get; set; }
+    }
+
+    public enum Language
+    {
+        AZ, EN, RU
     }
 }

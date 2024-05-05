@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsMedia.Application", "Ne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsMedia.Infrastructure", "NewsMedia.Infrastructure\NewsMedia.Infrastructure.csproj", "{89D02BD6-0EE1-4F6F-8D88-AAE0451973D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsMedia.Persistance", "NewsMedia.Persistance\NewsMedia.Persistance.csproj", "{63D7AFD3-8E5C-499E-A520-A32A78A1317D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsMedia.Persistance", "NewsMedia.Persistance\NewsMedia.Persistance.csproj", "{63D7AFD3-8E5C-499E-A520-A32A78A1317D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

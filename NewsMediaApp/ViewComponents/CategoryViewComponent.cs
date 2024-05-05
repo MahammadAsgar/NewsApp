@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewsMedia.Domain.Models.Entities;
 using NewsMedia.Infrastructure.Services.Entities.Abstractions;
 
 namespace NewsMediaApp.ViewComponents
@@ -10,9 +11,9 @@ namespace NewsMediaApp.ViewComponents
         {
             _categoryBaseService = categoryBaseService;
         }
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(Language language)
         {
-            var categoryBases = await _categoryBaseService.GetCategoryBasesWithCategories();
+            var categoryBases = await _categoryBaseService.GetCategoryBasesWithCategories(language);
             return View(categoryBases);
         }
     }

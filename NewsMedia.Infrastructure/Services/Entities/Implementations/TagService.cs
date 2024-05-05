@@ -33,18 +33,17 @@ namespace NewsMedia.Infrastructure.Services.Entities.Implementations
 
         public async Task DeleteTag(int id)
         {
-            var tag = await _tagRepository.GetTagsForDelete(id);
-            var articles = await _articleRepository.Where(x => x.Tags.Contains(tag)).ToListAsync();
-
+            //var tag = await _tagRepository.GetTagsForDelete(id);
+            //var articles = await _articleRepository.Where(x => x.Tags.Contains(tag)).ToListAsync();
         }
 
-        public async Task<GetTagWithArticlesDto> GetTag(int id)
+        public async Task<GetTagWithArticlesDto> GetTag(int id, Language language)
         {
-            var entity = await _tagRepository.GetTagWithArticle(id);
+            var entity = await _tagRepository.GetTagWithArticle(id, language);
             return _mapper.Map<GetTagWithArticlesDto>(entity);
         }
 
-        public async Task<IEnumerable<GetTagDto>> GetTags()
+        public async Task<IEnumerable<GetTagDto>> GetTags(Language language)
         {
             var enyities = await _genericRepository.GetEntities();
             var tags = _mapper.Map<IEnumerable<GetTagDto>>(enyities);

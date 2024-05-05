@@ -15,22 +15,22 @@ namespace NewsMedia.Application.Repositories.Implementations
             _dbSet = _dbContext.Set<Category>();
         }
 
-        public async Task<Category> GetCategoryWithArticle(int id)
+        public async Task<Category> GetCategoryWithArticle(int id, Language language)
         {
             return await _dbSet
                  .Include(x => x.Articles)
                  .ThenInclude(y => y.ArticleTitleFile)
                  .Include(x => x.Articles)
                  .ThenInclude(y => y.Tags)
-                 .FirstOrDefaultAsync(x => x.Id == id);
+                 .FirstOrDefaultAsync(x => x.Id == id&&x.Language==language);
         }
 
-        public async Task<Category> GetCategoryWithBase(int id)
+        public async Task<Category> GetCategoryWithBase(int id, Language language)
         {
-            return await _dbSet.Include(x => x.CategoryBase).FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbSet.Include(x => x.CategoryBase).FirstOrDefaultAsync(x => x.Id == id&&x.Language==language);
         }
 
-        public async Task<IEnumerable<Category>> GetAllCategoriesWithArticlesAsync()
+        public async Task<IEnumerable<Category>> GetAllCategoriesWithArticlesAsync(Language language)
         {
             return await _dbSet
                 .Include(x => x.Articles)
@@ -38,7 +38,7 @@ namespace NewsMedia.Application.Repositories.Implementations
                 .Include(x => x.Articles)
                 .ThenInclude(y => y.Tags)
                 .OrderBy(x => x.Id)
-                .Where(x => x.Articles.Count() >=1)
+                .Where(x => x.Articles.Count() >=1&&x.Language==language)
                 .ToListAsync();
         }
     }

@@ -1,107 +1,110 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using NewsMedia.Infrastructure.DTOS.Entities.Article.Post;
-using NewsMedia.Infrastructure.Services.Entities.Abstractions;
-using NewsMediaApp.Models;
-using System.Security.Claims;
+﻿//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.Mvc.Rendering;
+//using NewsMedia.Domain.Models.Entities;
+//using NewsMedia.Infrastructure.DTOS.Entities.Article.Post;
+//using NewsMedia.Infrastructure.Services.Entities.Abstractions;
+//using NewsMediaApp.Models;
+//using System.Security.Claims;
 
-namespace NewsMediaApp.Controllers
-{
-    public class NewsController : Controller
-    {
-        readonly IArticleService _articleService;
-        readonly ITagService _tagService;
-        readonly ICategoryService _categoryService;
-        readonly IHttpContextAccessor _contextAccessor;
-        public NewsController(ITagService tagService, ICategoryService categoryService, IArticleService articleService, IHttpContextAccessor contextAccessor)
-        {
-            _tagService = tagService;
-            _articleService = articleService;
-            _categoryService = categoryService;
-            _contextAccessor = contextAccessor;
-        }
+//namespace NewsMediaApp.Controllers
+//{
+//    public class NewsController : Controller
+//    {
+//        readonly IArticleService _articleService;
+//        readonly ITagService _tagService;
+//        readonly ICategoryService _categoryService;
+//        readonly IHttpContextAccessor _contextAccessor;
+//        public NewsController(ITagService tagService, ICategoryService categoryService, IArticleService articleService, IHttpContextAccessor contextAccessor)
+//        {
+//            _tagService = tagService;
+//            _articleService = articleService;
+//            _categoryService = categoryService;
+//            _contextAccessor = contextAccessor;
+//        }
 
-        public async Task<IActionResult> Index()
-        {
-            var articles = await _articleService.GetArticles();
-            return View(articles);
-        }
+//        public async Task<IActionResult> Index(Language language)
+//        {
+//            var articles = await _articleService.GetArticles(language);
+//            return View(articles);
+//        }
 
-        public async Task<IActionResult> GetArticle(int id)
-        {
-            var article = await _articleService.GetArticle(id);
-            var articles = await _articleService.GetArticlesByTag(article.Category, article.Tags);
-            var datas = new ArticleArticles
-            {
-                Article = article,
-                Articles = articles
-            };
+//        public async Task<IActionResult> GetArticle(int id, Language language)
+//        {
+//            var article = await _articleService.GetArticle(id, language);
+//            var articles = await _articleService.GetArticlesByTag(article.Category, article.Tags);
+//            var datas = new ArticleArticles
+//            {
+//                Article = article,
+//                Articles = articles
+//            };
 
-            if (article == null)
-            {
-                return NotFound();
-            }
+//            if (article == null)
+//            {
+//                return NotFound();
+//            }
 
-            return View(datas);
-        }
+//            return View(datas);
+//        }
 
-        public async Task<IActionResult> GetArticlesByCategory(int categoryId)
-        {
-            var articles = await _categoryService.GetCategory(categoryId);
-            return View(articles);
-        }
+//        public async Task<IActionResult> GetArticlesByCategory(int categoryId, Language language)
+//        {
+//            var articles = await _categoryService.GetCategory(categoryId, language);
+//            return View(articles);
+//        }
 
-        public async Task<IActionResult> GetArticlesByTag(int tagId)
-        {
-            var articles = await _tagService.GetTag(tagId);
-            return View(articles);
-        }
-        public IActionResult AddArticle()
-        {
-            var categories = _categoryService.GetCategories().Result;
+//        public async Task<IActionResult> GetArticlesByTag(int tagId, Language language)
+//        {
+//            var articles = await _tagService.GetTag(tagId, language);
+//            return View(articles);
+//        }
+//        public IActionResult AddArticle()
+//        {
+//            Language language;
+//            var categories = _categoryService.GetCategories(language).Result;
 
-            ViewBag.Categories = new SelectList(categories, "Id", "Name");
+//            ViewBag.Categories = new SelectList(categories, "Id", "Name");
 
-            var tags = _tagService.GetTags().Result.ToList();
+//            var tags = _tagService.GetTags().Result.ToList();
 
-            ViewBag.Tags = new MultiSelectList(tags, "Id", "Name");
-            return View();
-        }
+//            ViewBag.Tags = new MultiSelectList(tags, "Id", "Name");
+//            return View();
+//        }
 
-        [HttpPost]
-        public async Task<IActionResult> AddArticle(AddArticleDto addArticleDto)
-        {
-            var user = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+//        [HttpPost]
+//        public async Task<IActionResult> AddArticle(AddArticleDto addArticleDto)
+//        {
+//            var user = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (ModelState.IsValid)
-            {
-                await _articleService.AddArticle(addArticleDto, user);
-            }
-            return RedirectToAction("Index", "News");
-        }
+//            if (ModelState.IsValid)
+//            {
+//                await _articleService.AddArticle(addArticleDto, user);
+//            }
+//            return RedirectToAction("Index", "News");
+//        }
 
 
-        [HttpGet]
-        public async Task<IActionResult> UpdateArticle(int id)
-        {
-            // Retrieve the current article data
-            var article = await _articleService.GetArticle(id);
-            if (article == null)
-            {
-                return NotFound();
-            }
+//        [HttpGet]
+//        public async Task<IActionResult> UpdateArticle(int id)
+//        {
+//            //// Retrieve the current article data
+//            //var article = await _articleService.GetArticle(id);
+//            //if (article == null)
+//            //{
+//            //    return NotFound();
+//            //}
 
-            // Retrieve categories and tags
-            var categories = await _categoryService.GetCategories();
-            var tags = await _tagService.GetTags();
+//            //// Retrieve categories and tags
+//            //var categories = await _categoryService.GetCategories();
+//            //var tags = await _tagService.GetTags();
 
-            // Select the tags that are already assigned to the article
-            var selectedTags = article.Tags.Select(t => t.Id).ToList();
+//            //// Select the tags that are already assigned to the article
+//            //var selectedTags = article.Tags.Select(t => t.Id).ToList();
 
-            // Pass the article data and selected tags to the view
-            ViewBag.Categories = new SelectList(categories, "Id", "Name", article.Category.Id);
-            ViewBag.Tags = new MultiSelectList(tags, "Id", "Name", selectedTags);
-            return View(article);
-        }
-    }
-}
+//            //// Pass the article data and selected tags to the view
+//            //ViewBag.Categories = new SelectList(categories, "Id", "Name", article.Category.Id);
+//            //ViewBag.Tags = new MultiSelectList(tags, "Id", "Name", selectedTags);
+//            //return View(article);
+//            return NotFound();
+//        }
+//    }
+//}

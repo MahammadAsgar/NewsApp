@@ -1,23 +1,35 @@
-﻿@using NewsMedia.Infrastructure.DTOS.Entities.CategoryBase.Post
+﻿@using NewsMedia.Domain.Models.Entities
+@using NewsMedia.Infrastructure.DTOS.Entities.CategoryBase.Post
 @model AddCategoryBaseDto
 
+<form method="post" asp-controller="CategoryBase" asp-action="AddCategoryBase">
+    @Html.AntiForgeryToken()
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Category Base</h2>
+            <hr />
+        </div>
+        @*<div asp-validation-summary="All"></div>*@
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
 
- <form method="post" asp-controller="CategoryBase" asp-action="AddCategoryBase">
-	@Html.AntiForgeryToken()
-	<div class="border p-3 mt-4">
-		<div class="row pb-2">
-			<h2 class="text-primary">Create Category Base</h2>
-			<hr />
-		</div>
-		@*<div asp-validation-summary="All"></div>*@
-		<div class="mb-3">
-			<label asp-for="Name"></label>
-			<input asp-for="Name" class="form-control" />
-			<span asp-validation-for="Name" class="text-danger"></span>
-		</div>
-		<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
-		<a asp-controller="CategoryBase" asp-action="Index" class="btn btn-secondary" style="width:150px">
-			Back to List
-		</a>
-	</div>
+        <div class="mb-3">
+            <label asp-for="Language"></label>
+            <select asp-for="Language" class="form-control">
+                @foreach (var language in Enum.GetValues(typeof(Language)))
+                {
+                    <option value="@language">@language</option>
+                }
+            </select>
+            <span asp-validation-for="Language" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="CategoryBase" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+    </div>
 </form>

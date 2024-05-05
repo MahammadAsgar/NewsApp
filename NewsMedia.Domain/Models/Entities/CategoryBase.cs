@@ -5,6 +5,7 @@ namespace NewsMedia.Domain.Models.Entities
     public class CategoryBase : BaseEntity
     {
         public string Name { get; set; }
+        public Language Language { get; set; }
         public virtual List<Category> Categories { get; set; }
     }
 }

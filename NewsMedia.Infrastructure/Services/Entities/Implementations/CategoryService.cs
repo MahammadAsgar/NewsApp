@@ -33,27 +33,27 @@ namespace NewsMedia.Infrastructure.Services.Entities.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<GetCategoryWithArticleDto>> GetAllCategoriesWithArticlesAsync()
+        public async Task<IEnumerable<GetCategoryWithArticleDto>> GetAllCategoriesWithArticlesAsync(Language language)
         {
-            var entities = await _categoryRepository.GetAllCategoriesWithArticlesAsync();
+            var entities = await _categoryRepository.GetAllCategoriesWithArticlesAsync(language);
             return _mapper.Map<IEnumerable<GetCategoryWithArticleDto>>(entities);
         }
-        public async Task<IEnumerable<GetCategoryDto>> GetCategories()
+        public async Task<IEnumerable<GetCategoryDto>> GetCategories(Language language)
         {
-            var entities = await _genericRepository.GetEntities();
+            var entities =  _genericRepository.Where(x=>x.Language==language);
             return _mapper.Map<IEnumerable<GetCategoryDto>>(entities);
         }
 
-        public async Task<GetCategoryWithArticleDto> GetCategory(int id)
+        public async Task<GetCategoryWithArticleDto> GetCategory(int id, Language language)
         {
-            var entity = await _categoryRepository.GetCategoryWithArticle(id);
+            var entity = await _categoryRepository.GetCategoryWithArticle(id, language);
             return _mapper.Map<GetCategoryWithArticleDto>(entity);
         }
 
 
-        public async Task<GetCatgoryWithBaseDto> GetCategoryWithBase(int id)
+        public async Task<GetCatgoryWithBaseDto> GetCategoryWithBase(int id, Language language)
         {
-            var entity = await _categoryRepository.GetCategoryWithBase(id);
+            var entity = await _categoryRepository.GetCategoryWithBase(id, language);
             return _mapper.Map<GetCatgoryWithBaseDto>(entity);
         }
         public async Task<GetCategoryDto> UpdateCategory(AddCategoryDto addCategoryDto, int id)

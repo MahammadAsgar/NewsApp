@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewsMedia.Domain.Models.Entities;
 using NewsMedia.Infrastructure.DTOS.Entities.Tag.Post;
 using NewsMedia.Infrastructure.Services.Entities.Abstractions;
 
@@ -12,15 +13,15 @@ namespace NewsMediaApp.Controllers
             _tagService = tagService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Language language)
         {
-            var tags = await _tagService.GetTags();
+            var tags = await _tagService.GetTags(language);
             return View(tags);
         }
 
-        public async Task<IActionResult> GetTag(int id)
+        public async Task<IActionResult> GetTag(int id, Language language)
         {
-            var tag = await _tagService.GetTag(id);
+            var tag = await _tagService.GetTag(id, language);
             return View(tag);
         }
 
@@ -39,15 +40,15 @@ namespace NewsMediaApp.Controllers
             return RedirectToAction("Index", "Tag");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> UpdateTag(int id)
-        {
-            var tag = await _tagService.GetTag(id);
-            if (tag == null)
-            {
-                return NotFound();
-            }
-            return View(tag);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> UpdateTag(int id)
+        //{
+        //    var tag = await _tagService.GetTag(id);
+        //    if (tag == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(tag);
+        //}
     }
 }

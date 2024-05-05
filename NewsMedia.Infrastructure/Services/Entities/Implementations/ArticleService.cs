@@ -54,15 +54,15 @@ namespace NewsMedia.Infrastructure.Services.Entities.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task<GetArticleFullDto> GetArticle(int id)
+        public async Task<GetArticleFullDto> GetArticle(int id, Language language)
         {
-            var entity = await _articleRepository.GetArticleFull(id);
+            var entity = await _articleRepository.GetArticleFull(id, language);
             return _mapper.Map<GetArticleFullDto>(entity);
         }
 
-        public async Task<IEnumerable<GetArticleFullDto>> GetArticles()
+        public async Task<IEnumerable<GetArticleFullDto>> GetArticles(Language language)
         {
-            var entities = await _articleRepository.GetArticles();
+            var entities = await _articleRepository.GetArticles(language);
             return _mapper.Map<IEnumerable<GetArticleFullDto>>(entities);
         }
 
@@ -80,14 +80,14 @@ namespace NewsMedia.Infrastructure.Services.Entities.Implementations
             return data;
         }
 
-        public async Task<IEnumerable<GetArticleFullDto>> GetArticleByUser(int userId)
+        public async Task<IEnumerable<GetArticleFullDto>> GetArticleByUser(int userId, Language language)
         {
             var entities = await _articleRepository.Where(x => x.AppUser.Id == userId).ToListAsync();
             return _mapper.Map<IEnumerable<GetArticleFullDto>>(entities);
         }
-        public async Task<IEnumerable<GetArticleSlider>> GetArticleForSlider()
+        public async Task<IEnumerable<GetArticleSlider>> GetArticleForSlider(Language language)
         {
-            var entities = await _articleRepository.GetArticleSlider();
+            var entities = await _articleRepository.GetArticleSlider(language);
             return _mapper.Map<IEnumerable<GetArticleSlider>>(entities);
         }
         public async Task<GetArticleFullDto> UpdateArticle(AddArticleDto addCategoryDto, int id)

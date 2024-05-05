@@ -15,19 +15,19 @@ namespace NewsMedia.Application.Repositories.Implementations
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<Tag>();
         }
-        public async Task<Tag> GetTagWithArticle(int id)
+        public async Task<Tag> GetTagWithArticle(int id, Language language)
         {
             return await _dbSet
                 .Include(x => x.Articles)
                 .ThenInclude(y=>y.ArticleTitleFile)
                 .Include(x=>x.Articles)
                 .ThenInclude(y => y.Tags)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id && x.Language == language);
         }
 
-        public async Task<Tag> GetTagsForDelete(int id)
+        public async Task<Tag> GetTagsForDelete(int id, Language language)
         {
-            return await _dbSet.Include(x => x.Articles).FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbSet.Include(x => x.Articles).FirstOrDefaultAsync(x => x.Id == id&&x.Language==language);
         }
     }
 }

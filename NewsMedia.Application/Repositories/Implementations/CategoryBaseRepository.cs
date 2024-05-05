@@ -14,17 +14,18 @@ namespace NewsMedia.Application.Repositories.Implementations
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<CategoryBase>();
         }
-        public async Task<CategoryBase> GetCategoryBaseWithCategory(int id)
+        public async Task<CategoryBase> GetCategoryBaseWithCategory(int id, Language language)
         {
             return await _dbSet
                 .Include(x => x.Categories)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id&&x.Language==language);
         }
 
-        public async Task<List<CategoryBase>> GetCategoryBaseWithCategories()
+        public async Task<List<CategoryBase>> GetCategoryBaseWithCategories(Language language)
         {
             return await _dbSet
                 .Include(x => x.Categories)
+                .Where(x=>x.Language== language)
                 .ToListAsync();
         }
     }

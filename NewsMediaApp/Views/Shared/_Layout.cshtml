@@ -11,7 +11,7 @@
 
     <style>
         .sub-menu {
-            display: none;f
+            display: none;
         }
 
         /* Show submenu when hovering over its parent */
@@ -35,6 +35,13 @@
             margin-top: 15px; /* Adjust margin as needed */
             margin-bottom: 15px;
         }
+
+        /* Style for language buttons */
+        .language-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -54,6 +61,20 @@
                         <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                     </div>
                 </div>
+                <!-- Language buttons -->
+                <div class="language-dropdown">
+                    <div class="dropdown">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Language
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item" asp-route-language="AZ">Azerbaycan</a></li>
+                            <li><a class="dropdown-item" asp-route-language="EN">English</a></li>
+                            <li><a class="dropdown-item" asp-route-language="RU">Русский</a></li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </nav>
     </header>
@@ -100,6 +121,13 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Function to change language
+        // function changeLanguage(lang) {
+        //     // Implement logic to change language
+        //     // For demonstration purposes, alerting the selected language
+        //     alert('Language changed to: ' + lang);
+        // }
     </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

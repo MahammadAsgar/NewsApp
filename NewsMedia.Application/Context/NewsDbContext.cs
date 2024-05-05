@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NewsMedia.Application.EntitiesConfiguration;
 using NewsMedia.Domain.Models.Entities;
 using NewsMedia.Domain.Models.Users;
+using System.Reflection.Emit;
 
 namespace NewsMedia.Application.Context
 {
@@ -13,11 +14,11 @@ namespace NewsMedia.Application.Context
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.EnableSensitiveDataLogging();
-            base.OnConfiguring(optionsBuilder);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //optionsBuilder.EnableSensitiveDataLogging();
+        //    //base.OnConfiguring(optionsBuilder);
+        //}
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new RoleConfiguration());

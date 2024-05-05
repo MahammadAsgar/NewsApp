@@ -31,15 +31,15 @@ namespace NewsMediaApp.Controllers
             return RedirectToAction("AddCategoryBase", "CategoryBase");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> UpdateCategory(int id)
-        {
-            var categoryBase = await _categoryBaseService.GetCategoryBase(id);
-            if (categoryBase == null)
-            {
-                return NotFound();
-            }
-            return View(categoryBase);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> UpdateCategory(int id)
+        //{
+        //    var categoryBase = await _categoryBaseService.GetCategoryBase(id);
+        //    if (categoryBase == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(categoryBase);
+        //}
     }
 }

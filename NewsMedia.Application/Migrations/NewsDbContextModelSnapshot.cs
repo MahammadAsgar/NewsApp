@@ -164,17 +164,20 @@ namespace NewsMedia.Application.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DeleteDate")
+                    b.Property<DateTime?>("DeleteDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -203,7 +206,7 @@ namespace NewsMedia.Application.Migrations
                     b.Property<int>("ArticleId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DeleteDate")
+                    b.Property<DateTime?>("DeleteDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FileName")
@@ -217,7 +220,7 @@ namespace NewsMedia.Application.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -238,7 +241,7 @@ namespace NewsMedia.Application.Migrations
                     b.Property<DateTime>("AddDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeleteDate")
+                    b.Property<DateTime?>("DeleteDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FileName")
@@ -252,7 +255,7 @@ namespace NewsMedia.Application.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -274,17 +277,20 @@ namespace NewsMedia.Application.Migrations
                     b.Property<int>("CategoryBaseId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DeleteDate")
+                    b.Property<DateTime?>("DeleteDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -305,17 +311,20 @@ namespace NewsMedia.Application.Migrations
                     b.Property<DateTime>("AddDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeleteDate")
+                    b.Property<DateTime?>("DeleteDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -334,17 +343,20 @@ namespace NewsMedia.Application.Migrations
                     b.Property<DateTime>("AddDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeleteDate")
+                    b.Property<DateTime?>("DeleteDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

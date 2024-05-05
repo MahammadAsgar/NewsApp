@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.IdentityModel.Tokens;
 using NewsMedia.Application;
 using NewsMedia.Infrastructure;
 using NewsMedia.Persistance;
+using System.Globalization;
 using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization();
+
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
 builder.Services.AddPersistanceServices();
@@ -22,7 +26,23 @@ builder.Services.Configure<FormOptions>(options =>
     options.ValueLengthLimit = int.MaxValue;
     options.MultipartBodyLengthLimit = 1000000; // Limit to 1 MB
 
+
+
 });
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+                new CultureInfo("en-EN"),
+                new CultureInfo("ru-RU"),
+                new CultureInfo("az-AZ")
+            };
+
+    options.DefaultRequestCulture = new RequestCulture("az-AZ");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
 builder.Services.AddAuthentication()
     .AddJwtBearer(jwt =>
     {
@@ -46,6 +66,7 @@ builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -61,6 +82,7 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseAuthorization();
 app.UseSession();
+app.UseRequestLocalization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

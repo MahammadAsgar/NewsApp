@@ -8,5 +8,6 @@ namespace NewsMedia.Domain.Models.Entities
         public virtual List<Article> Articles { get; set; }
         public int CategoryBaseId { get; set; }
         public CategoryBase CategoryBase { get; set; }
+        public Language Language { get; set; }
     }
 }
