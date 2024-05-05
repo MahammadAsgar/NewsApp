@@ -12,7 +12,7 @@ using NewsMedia.Infrastructure.Services.Users.Abstractions;
 namespace NewsMediaApp.Controllers
 {
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
 
